@@ -15,7 +15,7 @@ web_sales ws1
 ,web_site
 where
 d_date between '2001-4-01' and
-(cast('2001-4-01' as date) + 60 days)
+date_add(cast('2001-4-01' as date) , interval 60 day)
 and ws1.ws_ship_date_sk = d_date_sk
 and ws1.ws_ship_addr_sk = ca_address_sk
 and ca_state = 'VA'
