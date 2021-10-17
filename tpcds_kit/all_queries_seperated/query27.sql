@@ -1,5 +1,5 @@
 -- start query 27 in stream 0 using template query27.tpl
-select  i_item_id,
+select * from (select  i_item_id,
 s_state, grouping(s_state) g_state,
 avg(ss_quantity) agg1,
 avg(ss_list_price) agg2,
@@ -15,9 +15,8 @@ cd_marital_status = 'W' and
 cd_education_status = 'Secondary' and
 d_year = 1999 and
 s_state in ('TN','TN', 'TN', 'TN', 'TN', 'TN')
-group by rollup (i_item_id, s_state)
-order by i_item_id
-,s_state
+group by (i_item_id, s_state) with rollup ) t
+order by t.i_item_id,t.s_state
 limit 100;
 
 -- end query 27 in stream 0 using template query27.tpl

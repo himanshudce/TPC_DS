@@ -1,4 +1,5 @@
 -- start query 36 in stream 0 using template query36.tpl
+select * from (
 select
 sum(ss_net_profit)/sum(ss_ext_sales_price) as gross_margin
 ,i_category
@@ -20,7 +21,7 @@ and i_item_sk  = ss_item_sk
 and s_store_sk  = ss_store_sk
 and s_state in ('TN','TN','TN','TN',
 'TN','TN','TN','TN')
-group by rollup(i_category,i_class)
+group by (i_category,i_class) with rollup ) t
 order by
 lochierarchy desc
 ,case when lochierarchy = 0 then i_category end
