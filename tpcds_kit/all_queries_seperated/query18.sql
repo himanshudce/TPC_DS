@@ -24,7 +24,7 @@ c_birth_month in (1,3,7,11,10,4) and
 d_year = 2001 and
 ca_state in ('AL','MO','TN'
 ,'GA','MT','IN','CA')
-group by rollup (i_item_id, ca_country, ca_state, ca_county)
+group by (i_item_id, ca_country, ca_state, ca_county) with rollup
 order by ca_country,
 ca_state,
 ca_county,

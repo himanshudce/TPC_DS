@@ -15,10 +15,10 @@ for i,query_tuple in enumerate(queries_path_updated):
     query_path = query_tuple[0]
     print("running query "+str(i+1))
     start = time.time()
-    if os.system(f'mysql -u root -D tpcds < {query_path};')!=0:
+    if os.system(f'sudo mysql -u root -D tpcds < {query_path};')!=0:
         print("error in query "+str(i+1))
     end = time.time()
-    print("time taken for query "+str(i+1)+"-"+str(end-start)+"\n\n")
+    print("time taken for query "+str(i+1)+" is - "+str(end-start)+"\n\n")
     query_results.append([query_path,i+1,end-start])
     
 
