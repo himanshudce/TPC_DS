@@ -14,14 +14,17 @@ query_results = []
 for i,query_tuple in enumerate(queries_path_updated):
     query_path = query_tuple[0]
     query_no = query_tuple[1]
+    Error="NO"
     print("running query "+str(query_no))
     start = time.time()
+    
     if os.system(f'mysql -u sergio -D tpcds < {query_path};')!=0:
+
         print("error in query "+str(query_no))
     end = time.time()
     print("time taken for query "+str(query_no)+" is - "+str(end-start)+"\n\n")
-    query_results.append([query_path,query_no,end-start])
+    query_results.append([query_path,query_no,end-start,Error])
     
 
-query_results_df = pd.DataFrame(query_results,columns=['path','query_number','time(s)'])
+query_results_df = pd.DataFrame(query_results,columns=['path','query_number','time(s)',"Error"])
 query_results_df.to_csv('query_results.csv',index=False)
