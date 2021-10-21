@@ -18,7 +18,7 @@ for i,query_tuple in enumerate(queries_path_updated):
     print("running query "+str(query_no))
     start = time.time()
     
-    if os.system(f'mysql -u sergio -D tpcds < {query_path};')!=0:
+    if os.system(f'mysql -u root -D tpcds < {query_path};')!=0:
     	print("error in query "+str(query_no))
     	QError = "YES"
     	
