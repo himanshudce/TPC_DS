@@ -27,7 +27,6 @@ echo "# Create tables"
 $MYSQL < ./tpcds_kit/tools/tpcds.sql
 
 TOTAL_MSECS=0
-
 echo "# Load data into table"
 for f in `ls $DATADIR`
 do
@@ -42,3 +41,12 @@ do
 	fi
 	printf "loaded the table \n" 
 done
+
+
+ELAPSED_TIME=$(($SECONDS - $START_TIME))
+echo "LOAD TIME FOR SCALE FACTOR $(($SF)) IS $(($ELAPSED_TIME)) SEC"   
+
+
+
+
+
