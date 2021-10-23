@@ -21,13 +21,8 @@ cd tpcds_kit/tools
 ./dsdgen -scale 1 -dir {$path to save data}
 ```
 
-### 4.Define table schema and load table data
+### 4.Define table schema, load table data and run all queries
 a.] remove root password and run
 ```
-sh ./load_data.sh
-```
-
-### 5.Run all queries 
-```
-python3 run_all_queries.py
+./main.sh <scale factor>
 ```
