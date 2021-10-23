@@ -15,7 +15,6 @@ then
 	exit 1
 fi
 
-
 USER=root
 MYSQL="mysql -u $USER"
 
@@ -26,7 +25,8 @@ MYSQL="$MYSQL tpcds"
 echo "# Create tables"
 $MYSQL < ./tpcds_kit/tools/tpcds.sql
 
-TOTAL_MSECS=0
+TOTAL_MSECS=$SECONDS
+
 echo "# Load data into table"
 for f in `ls $DATADIR`
 do
@@ -39,14 +39,15 @@ do
 		echo "FAIL"
 		exit 1
 	fi
-	printf "loaded the table \n" 
+	printf "loaded the table '$f' \n" 
 done
 
-
-ELAPSED_TIME=$(($SECONDS - $START_TIME))
+ELAPSED_TIME=$(($SECONDS - $TOTAL_MSECS))
 echo "LOAD TIME FOR SCALE FACTOR $(($SF)) IS $(($ELAPSED_TIME)) SEC"   
 
-
-
-
+echo "# runnning the python file to run all the queries"
+TOTAL_MSECS=0
+python3 run_all_queries.py
+ELAPSED_TIME=$(($SECONDS - $START_TIME))
+echo "TOTAL RUN TIME TO EXECUTE ALL QUEREIES FOR $(($SF)) IS $(($ELAPSED_TIME)) SEC" 
 
